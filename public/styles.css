@@ -1,0 +1,92 @@
+/* Estilos base (igual que antes) */
+body {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+}
+
+#name {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 1.2rem;
+}
+
+/* Nuevos estilos para la cuadrícula de demos */
+#demos {
+  margin: 80px 20px 100px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.demo {
+  background: #111;
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.demo:hover {
+  transform: translateY(-5px);
+}
+
+.demo-cover {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background: #222;
+}
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  font-size: 3rem;
+}
+
+.demo-info {
+  padding: 15px;
+}
+
+.demo-info h3 {
+  margin: 0 0 10px;
+  font-size: 1.1rem;
+}
+
+.demo-info p {
+  color: #aaa;
+  font-size: 0.9rem;
+  margin: 0 0 10px;
+}
+
+.demo-info small {
+  color: #555;
+  font-size: 0.8rem;
+}
+
+/* Reproductor (igual que antes) */
+#player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #111;
+  padding: 15px;
+  border-top: 1px solid #333;
+}
+
+#now-playing {
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+#audio {
+  width: 100%;
+}
