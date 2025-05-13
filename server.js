@@ -1,25 +1,32 @@
+// server.js - VERSIÓN DEFINITIVA
 require('dotenv').config();
 const express = require('express');
 const app = express();
 
-// Middleware básico
+// 1. Middleware esencial
 app.use(express.json());
 
-// Endpoint de supervivencia
-app.get('/railway-lifecheck', (req, res) => {
+// 2. Health Check ESPECÍFICO para Railway
+app.get('/railway-health', (req, res) => {
   res.status(200).json({ 
-    status: 'alive',
-    timestamp: new Date().toISOString() 
+    status: 'ready',
+    timestamp: Date.now() 
   });
 });
 
-// Puerto DINÁMICO (obligatorio para Railway)
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`✅ Servidor ACTIVO en puerto ${PORT}`);
+// 3. Puerto DINÁMICO (OBLIGATORIO)
+const PORT = process.env.PORT || 3000; // ¡Nunca 8080!
+
+// 4. Inicio con verificación
+app.listen(PORT, '0.0.0.0', () => { // '0.0.0.0' es crucial
+  console.log(`🔥 Servidor OPERATIVO en ${PORT}`);
+  setInterval(() => {
+    console.log('💓 Latido activo:', new Date().toISOString());
+  }, 15000); // Latidos cada 15 segundos
 });
 
-// Mantén el proceso vivo
-setInterval(() => {
-  console.log('❤️ Latido del servidor', new Date().toISOString());
-}, 30000);
+// 5. Manejo de SIGTERM (Para Railway)
+process.on('SIGTERM', () => {
+  console.log('Recibido SIGTERM. Cerrando limpiamente...');
+  process.exit(0);
+});
