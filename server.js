@@ -47,8 +47,24 @@ app.get('/api/demos', async (req, res) => {
   }
 });
 
+
 // 6. Iniciar servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Servidor corriendo en puerto ${PORT}`);
+});
+// Endpoint de prueba de DB
+app.get('/test-db', async (req, res) => {
+  try {
+    const [rows] = await pool.query('SELECT * FROM demos LIMIT 1');
+    res.json({ 
+      status: 'Conexión exitosa a la DB',
+      demo: rows[0] || 'No hay demos en la tabla'
+    });
+  } catch (error) {
+    res.status(500).json({ 
+      error: 'Error al conectar a la DB',
+      details: error.message
+    });
+  }
 });
